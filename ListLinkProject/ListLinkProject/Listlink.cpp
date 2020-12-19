@@ -209,12 +209,12 @@ public:
 //Ë«Á´±í
 class DoubleLinkList {
 private:
-	struct DoublyListNode {
+	struct ListNode {
 		int val;
-		DoublyListNode *next, *prev;
-		DoublyListNode(int x) : val(x), next(NULL), prev(NULL) {}
+		ListNode *next, *prev;
+		ListNode(int x) : val(x), next(NULL), prev(NULL) {}
 	};
-	DoublyListNode* head;
+	ListNode* head;
 
 public:
 	/** Initialize your data structure here. */
@@ -230,7 +230,7 @@ public:
 		}
 		else
 		{
-			DoublyListNode* node = head;
+			ListNode* node = head;
 			while (index != 0)
 			{
 				if (node->next)
@@ -251,12 +251,12 @@ public:
 	void addAtHead(int val) {
 		if (head == nullptr)
 		{
-			DoublyListNode* node = new DoublyListNode(val);
+			ListNode* node = new ListNode(val);
 			head = node;
 		}
 		else
 		{
-			DoublyListNode* node = new DoublyListNode(val);
+			ListNode* node = new ListNode(val);
 			node->next = head;
 			head->prev = node;
 			head = node;
@@ -271,7 +271,7 @@ public:
 		}
 		else
 		{
-			DoublyListNode* node = head;
+			ListNode* node = head;
 			while (true)
 			{
 				if (node->next)
@@ -283,7 +283,7 @@ public:
 					break;
 				}
 			}
-			DoublyListNode* tail = new DoublyListNode(val);
+			ListNode* tail = new ListNode(val);
 			node->next = tail;
 			tail->prev = node;
 		}
@@ -291,12 +291,106 @@ public:
 
 	/** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
 	void addAtIndex(int index, int val) {
-
+		if (index<=0)
+		{
+			addAtHead(val);
+		}else if (index>getLength())
+		{
+			return;
+		}
+		else if (index == getLength()) 
+		{
+			addAtTail(val);
+		}
+		else
+		{
+			ListNode* node = head;
+			while (index>0)
+			{
+				if (node->next)
+				{
+					node = node->next;
+				}
+				else
+				{
+					break;
+				}
+				index--;
+			}
+			ListNode* add = new ListNode(val);
+			ListNode* prev = node->prev;
+			prev->next = add;
+			add->prev = prev;
+			node->prev = add;
+			add->next = node;
+		}
 	}
 
 	/** Delete the index-th node in the linked list, if the index is valid. */
 	void deleteAtIndex(int index) {
+		if (index<0||index>getLength()-1)
+		{
+			return;
+		}
+		else if (index == 0)
+		{
+			head = head->next;
+			head->prev = nullptr;
+		}
+		else {
+			ListNode* node = head;
+			while (index>0)
+			{
+				if (node->next)
+				{
+					node = node->next;
+				}
+				else
+				{
+					break;
+				}
+				index--;
+			}
+			ListNode* deleteNode = node;
+			ListNode* prev = node->prev;
+			if (node->next)
+			{
+				prev->next = node->next;
+				node->next->prev = prev;
+				delete deleteNode;
+			}
+			else
+			{
+				prev->next = nullptr;
+				delete deleteNode;
+			}
+		}
 
+	}
+
+	int getLength() {
+		if (head == nullptr)
+		{
+			return 0;
+		}
+		else
+		{
+			ListNode* node = head;
+			int index = 1;
+			while (true)
+			{
+				if (node->next)
+				{
+					node = node->next;
+					index++;
+				}
+				else
+				{
+					break;
+				}
+			}
+			return index;
+		}
 	}
 };
 
