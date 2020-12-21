@@ -1,11 +1,23 @@
-#include "iostream"
+﻿#include "iostream"
 #include "string"
 
 
 using namespace std;
 
+/*
+链表是非线性存储的数据结构，对比单双链表
+它们都无法在常量时间内随机访问数据。
+它们都能够在 O(1) 时间内在给定结点之后或列表开头添加一个新结点。
+它们都能够在 O(1) 时间内删除第一个结点。
+但是删除给定结点(包括最后一个结点)时略有不同。
 
-//������
+在单链表中，它无法获取给定结点的前一个结点，因此在删除给定结点之前我们必须花费 O(N) 时间来找出前一结点。
+在双链表中，这会更容易，因为我们可以使用“prev”引用字段获取前一个结点。因此我们可以在 O(1) 时间内删除给定结点。
+
+PS：此处的时间复杂度是直接对节点进行操作的时间复杂度 add(*Linklist,*node) 和 add(*Linklist,int val)时间复杂度不一样
+*/
+
+//单链表
 class SinglyLinkedList {
 private:
 	struct ListNode
@@ -21,7 +33,7 @@ public:
 		head = nullptr;
 	}
 
-	/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. index��0��ʼ */
+	/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. index从0开始 */
 	int get(int index) {
 		if (head == nullptr)
 		{
@@ -164,7 +176,7 @@ public:
 		}
 	}
 
-	//������������
+	//返回链表长度
 	int getLength() {
 		ListNode* node = head;
 		if (node == nullptr)
@@ -186,7 +198,7 @@ public:
 		}
 	}
 
-	//�������
+	//输出链表
 	void printList() {
 		ListNode* node = head;
 		while (true)
@@ -206,7 +218,7 @@ public:
 	}
 };
 
-//˫����
+//双链表
 class DoubleLinkList {
 private:
 	struct ListNode {
@@ -335,7 +347,10 @@ public:
 		else if (index == 0)
 		{
 			head = head->next;
-			head->prev = nullptr;
+			if (head != nullptr)
+			{
+				head->prev = nullptr;
+			}	
 		}
 		else {
 			ListNode* node = head;
@@ -392,10 +407,32 @@ public:
 			return index;
 		}
 	}
+
+	void printList() {
+		if (head == nullptr)
+		{
+			return;
+		}
+		ListNode* node = head;
+		while (true)
+		{
+			cout << node->val << endl;
+			if (node->next)
+			{
+				node = node->next;
+			}
+			else
+			{
+				return;
+			}
+		}
+	}
 };
 
+//操作测试
 int main(int argc, char* argv[]) {
-	SinglyLinkedList* linklist = new SinglyLinkedList();
+	//SinglyLinkedList* linklist = new SinglyLinkedList();
+	DoubleLinkList* linklist = new DoubleLinkList();
 	linklist->addAtHead(1);
 	linklist->addAtHead(2);
 	linklist->addAtHead(3);
