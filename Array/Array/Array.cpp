@@ -211,11 +211,12 @@ public:
 		}
 	}
 
-	//5. 零矩阵 若M × N矩阵中某个元素为0，则将其所在的行与列清零
+	//5. 零矩阵 若M × N矩阵中某个元素为0，则将其所在的行与列清零 上海鸿利数码科技有限公司或上海盛页信息科技有限公司
 	void setZeroes(vector<vector<int>>& matrix) {
-		vector<vector<int>> vec = matrix;
 		int row = matrix.size();
 		int col = matrix[0].size();
+		vector<int> row0;
+		vector<int> col0;
 
 		for (int i=0;i<row;i++)
 		{
@@ -223,10 +224,13 @@ public:
 			{
 				if (matrix[i][j] == 0)
 				{
-					continue;
+					row0.push_back(i);
+					col0.push_back(j);
 				}
 			}
 		}
+
+		
 	}
 };
 
