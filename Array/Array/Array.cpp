@@ -149,6 +149,20 @@ public:
 		return merged;
 	}
 
+	void printArray(vector<vector<int>>& matrix) {
+		int row = matrix.size();
+		int col = matrix[0].size();
+		for (int i=0;i<row;i++)
+		{
+			for (int j=0;j<col;j++)
+			{
+				printf("%d ", matrix[i][j]);
+			}
+			printf("\n");
+		}
+	}
+
+
 	//4. 旋转矩阵 给定一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节，将图像旋转 90 度
 
 	//思路1：使用辅助矩阵 对于矩阵中第i行的第j个元素，在旋转后，它出现在倒数第i列的第j个位置 vect[col][n-row-1] = martix[row][col]
@@ -211,12 +225,13 @@ public:
 		}
 	}
 
-	//5. 零矩阵 若M × N矩阵中某个元素为0，则将其所在的行与列清零 上海鸿利数码科技有限公司或上海盛页信息科技有限公司
+	//5. 零矩阵 若M × N矩阵中某个元素为0，则将其所在的行与列清零 
 	void setZeroes(vector<vector<int>>& matrix) {
 		int row = matrix.size();
 		int col = matrix[0].size();
 		vector<int> row0;
 		vector<int> col0;
+		vector<int> zero(col,0);
 
 		for (int i=0;i<row;i++)
 		{
@@ -230,7 +245,72 @@ public:
 			}
 		}
 
+		for (int i=0;i<row0.size();i++)
+		{
+			matrix[row0[i]] = zero;
+		}
+
+		for (int i =0;i<col0.size();i++)
+		{
+			for (int j=0;j<row;j++)
+			{
+				matrix[j][col0[i]] = 0;
+			}
+		}
 		
+		printArray(matrix);
+	}
+
+	//6. 对角线遍历 给定一个含有 M x N 个元素的矩阵（M 行，N 列），以对角线遍历的顺序返回这个矩阵中的所有元素
+
+	//思路,对角线遍历每一趟时候元素的坐标和x+y=0,1,2...是恒定且递增的，且趟数为行列数和-1(x+y<row+col-2)，按照找到的规律解题
+	vector<int> findDiagonalOrder(vector<vector<int>>& matrix) {
+		if (&matrix == nullptr || matrix.size() == 0)
+		{
+			vector<int> zero(0);
+			return zero;
+		}
+
+		int row = matrix.size();
+		int col = matrix[0].size();
+		vector<int> nums;
+
+		int i = 0; //定义x+y的和
+		while (i <= row + col -2)
+		{
+			if ((i+1)%2) //奇数与偶数趟遍历x,y变化不同，需要进行判断
+			{
+				//奇数趟数的遍历，是从x为最大y为0位置的元素开始遍历，然后不x断减小直到为0，y不断增大
+				int x = (i < row) ? i : row-1;
+				int y = i - x;
+				while (x >= 0 && y < col)
+				{
+					nums.push_back(matrix[x][y]);
+					x--;
+					y++;
+				}
+			}
+			else
+			{
+				//偶数趟数的遍历，是从y为最大x为0位置的元素开始遍历，然后不断y减小直到为0，x不断增大
+				int y = (i < col) ? i : col - 1;
+				int x = i - y;
+				while (y >=0 && x < row)
+				{
+					nums.push_back(matrix[x][y]);
+					x++;
+					y--;
+				}
+			}
+			i++;
+		}
+
+		for (int i=0; i<nums.size();i++)
+		{
+			printf("%d ", nums[i]);
+		}
+
+		return nums;
 	}
 };
 
@@ -241,7 +321,8 @@ int main()
 	//vector<vector<int>> interval = { {1,3},{2,6},{15,18} };
 	//cout << s->pivotIndex(vec) << endl;
 	//cout << s->searchInsert(vec, 0) << endl;
-	vector<vector<int>> matrix = { {1,2,3},{4,5,6},{7,8,9},{11,12,13} };
-	s->rotate(matrix);
+	vector<vector<int>> matrix = { {1,2,3},{4,5,6},{7,8,9}};
+	//s->setZeroes(matrix);
+	s->findDiagonalOrder(matrix);
 	return 0;
 }
