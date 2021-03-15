@@ -1,0 +1,3 @@
+﻿  Str.cpp
+d:\workspace\code\c++\str\str\str.cpp(51): warning C4018: “>”: 有符号/无符号不匹配
+  Str.vcxproj -> D:\Workspace\code\c++\Str\Debug\Str.exe
