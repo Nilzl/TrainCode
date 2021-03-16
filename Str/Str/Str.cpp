@@ -1,4 +1,4 @@
-#include "iostream"
+ï»¿#include "iostream"
 #include "string"
 #include "vector"
 
@@ -6,14 +6,14 @@ using namespace std;
 
 class Solution {
 public:
-	//1.²éÕÒ×Ö·û´®Êı×éÖĞµÄ×î³¤¹«¹²Ç°×º¡£Èç¹û²»´æÔÚ¹«¹²Ç°×º£¬·µ»Ø¿Õ×Ö·û´® ""
+	//1.æŸ¥æ‰¾å­—ç¬¦ä¸²æ•°ç»„ä¸­çš„æœ€é•¿å…¬å…±å‰ç¼€ã€‚å¦‚æœä¸å­˜åœ¨å…¬å…±å‰ç¼€ï¼Œè¿”å›ç©ºå­—ç¬¦ä¸² ""
 	string longestCommonPrefix(vector<string>& strs) {
 		if (strs.empty())
 		{
 			return "";
 		}
 
-		//×İÏòÉ¨Ãè×Ö·û´®Êı×é£¬±È½ÏÃ¿¸ö×Ö·û´®Í¬Ò»Î»ÖÃ×Ö·ûÊÇ·ñÏàÍ¬£¬·µ»ØÏàÍ¬µÄ×î´ó×Ó´®
+		//çºµå‘æ‰«æå­—ç¬¦ä¸²æ•°ç»„ï¼Œæ¯”è¾ƒæ¯ä¸ªå­—ç¬¦ä¸²åŒä¸€ä½ç½®å­—ç¬¦æ˜¯å¦ç›¸åŒï¼Œè¿”å›ç›¸åŒçš„æœ€å¤§å­ä¸²
 		int row = strs.size();
 		int col = strs[0].size();
 		
@@ -22,7 +22,7 @@ public:
 			char c = strs[0][j];
 			for (int i=1;i<row;i++)
 			{
-				if (strs[i][j] != c || j == strs[i].size()) //×Ö·û´®³öÏÖ×Ö·û²»ÏàÍ¬Ê±È¡×Ó´®£¬»ò´ïµ½×Ö·û´®×î´ó³¤¶È
+				if (strs[i][j] != c || j == strs[i].size()) //å­—ç¬¦ä¸²å‡ºç°å­—ç¬¦ä¸ç›¸åŒæ—¶å–å­ä¸²ï¼Œæˆ–è¾¾åˆ°å­—ç¬¦ä¸²æœ€å¤§é•¿åº¦
 				{
 					return strs[0].substr(0, j);
 				}
@@ -31,7 +31,7 @@ public:
 		return strs[0];
 	}
 
-	//2.¸øÄãÒ»¸ö×Ö·û´® s£¬ÕÒµ½ s ÖĞ×î³¤µÄ»ØÎÄ×Ó´® ¶¯Ì¬¹æ»®
+	//2.ç»™ä½ ä¸€ä¸ªå­—ç¬¦ä¸² sï¼Œæ‰¾åˆ° s ä¸­æœ€é•¿çš„å›æ–‡å­ä¸² åŠ¨æ€è§„åˆ’
 	string longestPalindrome(string s) {
 		int n = s.size();
 		vector<vector<int>> dp(n, vector<int>(n));
@@ -56,8 +56,8 @@ public:
 		return ans;
 	}
 
-	//3.¸ø¶¨Ò»¸ö×Ö·û´®£¬Öğ¸ö·­×ª×Ö·û´®ÖĞµÄÃ¿¸öµ¥´Ê
-	//ÎŞ¿Õ¸ñ×Ö·û¹¹³ÉÒ»¸öµ¥´Ê¡£ÊäÈë×Ö·û´®¿ÉÒÔÔÚÇ°Ãæ»òÕßºóÃæ°üº¬¶àÓàµÄ¿Õ¸ñ£¬µ«ÊÇ·´×ªºóµÄ×Ö·û²»ÄÜ°üÀ¨¡£Èç¹ûÁ½¸öµ¥´Ê¼äÓĞ¶àÓàµÄ¿Õ¸ñ£¬½«·´×ªºóµ¥´Ê¼äµÄ¿Õ¸ñ¼õÉÙµ½Ö»º¬Ò»¸ö¡£
+	//3.ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œé€ä¸ªç¿»è½¬å­—ç¬¦ä¸²ä¸­çš„æ¯ä¸ªå•è¯
+	//æ— ç©ºæ ¼å­—ç¬¦æ„æˆä¸€ä¸ªå•è¯ã€‚è¾“å…¥å­—ç¬¦ä¸²å¯ä»¥åœ¨å‰é¢æˆ–è€…åé¢åŒ…å«å¤šä½™çš„ç©ºæ ¼ï¼Œä½†æ˜¯åè½¬åçš„å­—ç¬¦ä¸èƒ½åŒ…æ‹¬ã€‚å¦‚æœä¸¤ä¸ªå•è¯é—´æœ‰å¤šä½™çš„ç©ºæ ¼ï¼Œå°†åè½¬åå•è¯é—´çš„ç©ºæ ¼å‡å°‘åˆ°åªå«ä¸€ä¸ªã€‚
 	string reverseWords(string s) {
 		if (s.find(' ') == s.npos)
 		{
@@ -72,9 +72,16 @@ public:
 				string word = "";
 				for (size_t j=i;j<s.size();j++)
 				{
-					if (s[j] == ' ' || j == s.size()-1)
+					if (j == s.size() - 1) //å–åˆ°æœ€åä¸€ä¸ªå­—ç¬¦æ—¶å€™çš„æƒ…å†µ
 					{
-						word.append(s, i, j);
+						word = s.substr(i, j - i+1);
+						i = j;
+						break;
+					}
+
+					if (s[j] == ' ') //æ‰¾åˆ°ç©ºæ ¼å¼€å§‹æˆªå–å­—ç¬¦
+					{
+						word = s.substr(i, j-i);
 						i = j;
 						break;
 					}
@@ -97,14 +104,67 @@ public:
 		}
 		return result;
 	}
-		
+	
+	//4.ç»™å®šä¸€ä¸ªÂ haystack å­—ç¬¦ä¸²å’Œä¸€ä¸ª needle å­—ç¬¦ä¸²ï¼Œåœ¨ haystack å­—ç¬¦ä¸²ä¸­æ‰¾å‡º needle å­—ç¬¦ä¸²å‡ºç°çš„ç¬¬ä¸€ä¸ªä½ç½® (ä»0å¼€å§‹)ã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›-1ã€‚
+	//å½“ needle æ˜¯ç©ºå­—ç¬¦ä¸²æ—¶æˆ‘ä»¬åº”å½“è¿”å› 0 ã€‚è¿™ä¸Cè¯­è¨€çš„ strstr() ä»¥åŠ Javaçš„ indexOf() å®šä¹‰ç›¸ç¬¦
+	int strStr(string haystack, string needle) {
+		if (needle.empty())
+		{
+			return 0;
+		}
+		//æš´åŠ›æšä¸¾æ³•ç›´æ¥åœ¨åŸå­—ç¬¦ä¸²ä¸­å–å­ä¸²æ¯”è¾ƒ
+		for (int i=0;i<haystack.size();i++)
+		{
+			string s = haystack.substr(i,needle.size());
+			if (s == needle)
+			{
+				return i;
+			}
+		}
+		return -1;
+
+		// kmpå­—ç¬¦ä¸²åŒ¹é…ç®—æ³•
+		/*
+		int m = needle.length() , n = haystack.length();
+		if(!m)return 0;
+		vector <int> next(m , 0);
+		next[0] = -1;
+		int j = -1;
+		for(int i = 0 ; i < m - 1 ; i++) {
+			while(j >= 0 && needle[j] != needle[i])j = next[j];
+			j++;
+			next[i + 1] = j;
+		}
+		j = 0;
+		for(int i = 0 ; i < n ; i++) {
+			while(j >= 0 && haystack[i] != needle[j])j = next[j];
+			j++;
+			if(j == m)return i - m + 1;
+		}
+		return -1;
+		*/
+	}
+
+	//5.ç¼–å†™ä¸€ä¸ªå‡½æ•°ï¼Œå…¶ä½œç”¨æ˜¯å°†è¾“å…¥çš„å­—ç¬¦ä¸²åè½¬è¿‡æ¥ã€‚è¾“å…¥å­—ç¬¦ä¸²ä»¥å­—ç¬¦æ•°ç»„ char[] çš„å½¢å¼ç»™å‡ºã€‚
+	//ä¸è¦ç»™å¦å¤–çš„æ•°ç»„åˆ†é…é¢å¤–çš„ç©ºé—´ï¼Œä½ å¿…é¡»åŸåœ°ä¿®æ”¹è¾“å…¥æ•°ç»„ã€ä½¿ç”¨ O(1) çš„é¢å¤–ç©ºé—´è§£å†³è¿™ä¸€é—®é¢˜
+	void reverseString(vector<char>& s) {
+		int i = 0;
+		int j = s.size() - 1;
+		while (i<j)
+		{
+			char ch = s[i];
+			s[i] = s[j];
+			s[j] = ch;
+		}
+	}
+
 };
 
 int main() {
 
 	Solution* s = new Solution();
-	string str = "  Hello World";
-	cout << s->reverseWords(str) << endl;
+	vector<char> sh = { 'a','b','b','v' };
+	s->reverseString(sh);
 
 	return 0;
 }
